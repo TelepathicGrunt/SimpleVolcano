@@ -8,6 +8,7 @@ import com.telepathicgrunt.simplevolcano.world.features.FeatureInit;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
@@ -63,8 +64,9 @@ public class SimpleVolcano
 		//and if you use the BiomeDictionary, you can even check if the biome has certain tags like swamp or snowy.
 		for (Biome biome : ForgeRegistries.BIOMES)
 		{
-			biome.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureInit.VOLCANO.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG)
-					.withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+			if(!biome.getCategory().equals(Category.NETHER) && !biome.getCategory().equals(Category.THEEND))
+				biome.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, FeatureInit.VOLCANO.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG)
+						.withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 		}
 
 	}
